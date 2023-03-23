@@ -20,7 +20,6 @@ type CallContext struct {
 
 type Checker interface {
 	FilterKeyAndValues(pass *analysis.Pass, keyAndValues []ast.Expr) []ast.Expr
-	CheckLoggingKey(pass *analysis.Pass, keyAndValues []ast.Expr)
 	CheckPrintfLikeSpecifier(pass *analysis.Pass, args []ast.Expr)
 }
 
@@ -37,23 +36,15 @@ func ExecuteChecker(c Checker, pass *analysis.Pass, call CallContext, cfg Config
 
 	keyValuesArgs := c.FilterKeyAndValues(pass, call.Expr.Args[startIndex:])
 
-	if len(keyValuesArgs)%2 != 0 {
+	if len(keyValuesArgs) > 0 {
 		firstArg := keyValuesArgs[0]
 		lastArg := keyValuesArgs[len(keyValuesArgs)-1]
 		pass.Report(analysis.Diagnostic{
 			Pos:      firstArg.Pos(),
 			End:      lastArg.End(),
 			Category: DiagnosticCategory,
-			Message:  "odd number of arguments passed as key-value pairs for logging",
+			Message:  "arguments passed as key-value pairs for logging",
 		})
 	}
-
-	if cfg.RequireStringKey {
-		c.CheckLoggingKey(pass, keyValuesArgs)
-	}
-
-	if cfg.NoPrintfLike {
-		// Check all args
-		c.CheckPrintfLikeSpecifier(pass, call.Expr.Args)
-	}
+	c.CheckPrintfLikeSpecifier(pass, call.Expr.Args)
 }

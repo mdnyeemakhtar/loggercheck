@@ -49,7 +49,7 @@ func newLoggerCheck(opts ...Option) *loggercheck {
 	fs := flag.NewFlagSet("loggercheck", flag.ExitOnError)
 	l := &loggercheck{
 		fs:          fs,
-		disable:     sets.NewString("kitlog"),
+		disable:     sets.NewString(""),
 		rulesetList: append([]rules.Ruleset{}, staticRuleList...), // ensure we make a clone of static rules first
 	}
 
