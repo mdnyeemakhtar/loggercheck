@@ -3,7 +3,7 @@ package main
 import (
 	"golang.org/x/tools/go/analysis"
 
-	"github.com/timonwong/loggercheck"
+	"github.com/mdnyeemakhtar/loggercheck"
 )
 
 // AnalyzerPlugin provides analyzers as a plugin.

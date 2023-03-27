@@ -1,4 +1,4 @@
-module github.com/timonwong/loggercheck
+module github.com/mdnyeemakhtar/loggercheck
 
 go 1.19
 

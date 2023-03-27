@@ -1,7 +1,7 @@
 package loggercheck
 
 import (
-	"github.com/timonwong/loggercheck/internal/sets"
+	"github.com/mdnyeemakhtar/loggercheck/internal/sets"
 )
 
 type Option func(*loggercheck)

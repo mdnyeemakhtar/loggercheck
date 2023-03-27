@@ -4,8 +4,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/timonwong/loggercheck/internal/checkers"
-	"github.com/timonwong/loggercheck/internal/rules"
+	"github.com/mdnyeemakhtar/loggercheck/internal/checkers"
+	"github.com/mdnyeemakhtar/loggercheck/internal/rules"
 )
 
 var (

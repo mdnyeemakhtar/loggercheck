@@ -13,9 +13,9 @@ import (
 	"golang.org/x/tools/go/ast/inspector"
 	"golang.org/x/tools/go/types/typeutil"
 
-	"github.com/timonwong/loggercheck/internal/checkers"
-	"github.com/timonwong/loggercheck/internal/rules"
-	"github.com/timonwong/loggercheck/internal/sets"
+	"github.com/mdnyeemakhtar/loggercheck/internal/checkers"
+	"github.com/mdnyeemakhtar/loggercheck/internal/rules"
+	"github.com/mdnyeemakhtar/loggercheck/internal/sets"
 )
 
 const Doc = `Checks key value pairs for common logger libraries (kitlog,klog,logr,zap).`

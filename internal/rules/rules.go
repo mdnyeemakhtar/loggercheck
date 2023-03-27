@@ -8,7 +8,7 @@ import (
 	"io"
 	"strings"
 
-	"github.com/timonwong/loggercheck/internal/bytebufferpool"
+	"github.com/mdnyeemakhtar/loggercheck/internal/bytebufferpool"
 )
 
 var ErrInvalidRule = errors.New("invalid rule format")

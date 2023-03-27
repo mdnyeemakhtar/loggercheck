@@ -7,8 +7,8 @@ import (
 	"github.com/stretchr/testify/require"
 	"golang.org/x/tools/go/analysis/analysistest"
 
-	"github.com/timonwong/loggercheck"
-	"github.com/timonwong/loggercheck/internal/rules"
+	"github.com/mdnyeemakhtar/loggercheck"
+	"github.com/mdnyeemakhtar/loggercheck/internal/rules"
 )
 
 type dummyTestingErrorf struct {
