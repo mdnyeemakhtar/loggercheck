@@ -19,7 +19,7 @@ type CallContext struct {
 }
 
 type Checker interface {
-	FilterKeyAndValues(pass *analysis.Pass, keyAndValues []ast.Expr) []ast.Expr
+	FilterExtraArgs(pass *analysis.Pass, keyAndValues []ast.Expr) []ast.Expr
 	CheckPrintfLikeSpecifier(pass *analysis.Pass, args []ast.Expr)
 }
 
@@ -34,16 +34,16 @@ func ExecuteChecker(c Checker, pass *analysis.Pass, call CallContext, cfg Config
 		return // final (args) param is not ...interface{}
 	}
 
-	keyValuesArgs := c.FilterKeyAndValues(pass, call.Expr.Args[startIndex:])
+	extraArgs := c.FilterExtraArgs(pass, call.Expr.Args[startIndex:])
 
-	if len(keyValuesArgs) > 0 {
-		firstArg := keyValuesArgs[0]
-		lastArg := keyValuesArgs[len(keyValuesArgs)-1]
+	if len(extraArgs) > 0 {
+		firstArg := extraArgs[0]
+		lastArg := extraArgs[len(extraArgs)-1]
 		pass.Report(analysis.Diagnostic{
 			Pos:      firstArg.Pos(),
 			End:      lastArg.End(),
 			Category: DiagnosticCategory,
-			Message:  "arguments passed as key-value pairs for logging",
+			Message:  "additional arguments passed for logging, use fmt.Sprintf to format log message",
 		})
 	}
 	c.CheckPrintfLikeSpecifier(pass, call.Expr.Args)

@@ -11,10 +11,10 @@ type Zap struct {
 	General
 }
 
-func (z Zap) FilterKeyAndValues(pass *analysis.Pass, keyAndValues []ast.Expr) []ast.Expr {
+func (z Zap) FilterExtraArgs(pass *analysis.Pass, args []ast.Expr) []ast.Expr {
 	// Check the argument count
-	filtered := make([]ast.Expr, 0, len(keyAndValues))
-	for _, arg := range keyAndValues {
+	filtered := make([]ast.Expr, 0, len(args))
+	for _, arg := range args {
 		// Skip any zapcore.Field we found
 		switch arg := arg.(type) {
 		case *ast.CallExpr, *ast.Ident:

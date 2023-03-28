@@ -11,8 +11,8 @@ import (
 
 type General struct{}
 
-func (g General) FilterKeyAndValues(_ *analysis.Pass, keyAndValues []ast.Expr) []ast.Expr {
-	return keyAndValues
+func (g General) FilterExtraArgs(_ *analysis.Pass, args []ast.Expr) []ast.Expr {
+	return args
 }
 
 func (g General) CheckPrintfLikeSpecifier(pass *analysis.Pass, args []ast.Expr) {
@@ -27,7 +27,7 @@ func (g General) CheckPrintfLikeSpecifier(pass *analysis.Pass, args []ast.Expr) 
 				Pos:      arg.Pos(),
 				End:      arg.End(),
 				Category: DiagnosticCategory,
-				Message:  fmt.Sprintf("logging message should not use format specifier %q", specifier),
+				Message:  fmt.Sprintf("logging message should not use format specifier %q, use fmt.Sprintf to format log message", specifier),
 			})
 
 			return // One error diagnostic is enough

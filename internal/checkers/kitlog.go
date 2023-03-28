@@ -10,12 +10,12 @@ type Kitlog struct {
 	General
 }
 
-func (k Kitlog) FilterKeyAndValues(pass *analysis.Pass, keyAndValues []ast.Expr) []ast.Expr {
+func (k Kitlog) FilterExtraArgs(pass *analysis.Pass, args []ast.Expr) []ast.Expr {
 	// Check the argument count
-	if len(keyAndValues) > 0 {
-		return keyAndValues[1:]
+	if len(args) > 0 {
+		return args[1:]
 	}
-	return keyAndValues
+	return args
 }
 
 var _ Checker = (*Zap)(nil)
