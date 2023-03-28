@@ -42,7 +42,8 @@ var (
 	}
 	checkerByRulesetName = map[string]checkers.Checker{
 		// by default, checkers.General will be used.
-		"zap": checkers.Zap{},
+		"zap":    checkers.Zap{},
+		"kitlog": checkers.Kitlog{},
 	}
 )
 
