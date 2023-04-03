@@ -24,6 +24,7 @@ type Checker interface {
 }
 
 func ExecuteChecker(c Checker, pass *analysis.Pass, call CallContext, cfg Config) {
+	c.CheckPrintfLikeSpecifier(pass, call.Expr.Args)
 	params := call.Signature.Params()
 	nparams := params.Len() // variadic => nonzero
 	startIndex := nparams - 1
@@ -46,5 +47,4 @@ func ExecuteChecker(c Checker, pass *analysis.Pass, call CallContext, cfg Config
 			Message:  "additional arguments passed for logging, use fmt.Sprintf to format log message",
 		})
 	}
-	c.CheckPrintfLikeSpecifier(pass, call.Expr.Args)
 }
